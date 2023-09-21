@@ -342,6 +342,7 @@ def main(argv):
 
     pretrained = rave.RAVE()
     if checkpoint is not None:
+        print(f"Loading checkpoint from {checkpoint}")
         checkpoint = torch.load(checkpoint, map_location='cpu')
         if FLAGS.ema_weights and "EMA" in checkpoint["callbacks"]:
             pretrained.load_state_dict(

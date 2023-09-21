@@ -139,12 +139,12 @@ def main(argv):
                                                          filename="best")
     last_checkpoint = pl.callbacks.ModelCheckpoint(filename="last")
 
-    val_check = {}
-    if len(train) >= FLAGS.val_every:
-        val_check["val_check_interval"] = FLAGS.val_every
-    else:
-        nepoch = FLAGS.val_every // len(train)
-        val_check["check_val_every_n_epoch"] = nepoch
+    # val_check = {}
+    # if len(train) >= FLAGS.val_every:
+    #     val_check["val_check_interval"] = FLAGS.val_every
+    # else:
+    #     nepoch = FLAGS.val_every // len(train)
+    #     val_check["check_val_every_n_epoch"] = nepoch
 
     gin_hash = hashlib.md5(
         gin.operative_config_str().encode()).hexdigest()[:10]
@@ -199,7 +199,7 @@ def main(argv):
         max_steps=FLAGS.max_steps,
         profiler="simple",
         enable_progress_bar=FLAGS.progress,
-        **val_check,
+        check_val_every_n_epoch=FLAGS.val_every,
     )
 
     run = rave.core.search_for_run(FLAGS.ckpt)
