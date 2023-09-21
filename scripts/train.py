@@ -168,10 +168,6 @@ def main(argv):
         accelerator = "cuda"
         devices = FLAGS.gpu or rave.core.setup_gpu()
     elif torch.backends.mps.is_available():
-        print(
-            "Training on mac is not available yet. Use --gpu -1 to train on CPU (not recommended)."
-        )
-        exit()
         accelerator = "mps"
         devices = 1
 
